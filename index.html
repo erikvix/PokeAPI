@@ -6,9 +6,9 @@
     <title>PokeAPI</title>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script type="module" src="index.js"></script>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/x-icon" href="/public/favico.ico">
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/x-icon" href="/public/favico.ico" />
+    <link rel="stylesheet" href="" />
   </head>
   <body>
     <header class="header">
@@ -17,22 +17,28 @@
     <section>
       <div class="center">
         <div class="input">
-          <input type="text" id="input" placeholder="Enter Pokemon Name or ID" />
+          <input
+            type="text"
+            id="input"
+            placeholder="Enter Pokemon Name or ID"
+          />
           <button id="pesquisabtn">Search</button>
         </div>
         <div class="pokemon-box">
           <div class="pokemon_container">
-            <img id="pokeform" src="" alt="">
-            <img id="pokefoto" src="" alt="">
+            <img id="pokeform" src="" alt="" />
+            <img id="pokefoto" src="" alt="" />
           </div>
           <div class="box-info">
+            <div class="first-column">
+            </div>
             <h2 id="pokemon"></h2>
             <h3 id="pokeid"></h3>
-            <ul class="type-list">
-              <!-- <li id="poketipo"></li> -->
-
-            </ul>
+            <ul class="type-list"></ul>
             <h3 id="pokeweak"></h3>
+            <p id="pokepeso"></p>
+            <p id="pokealtura"></p>
+            <p id="pokepeso"></p>
           </div>
         </div>
       </div>
