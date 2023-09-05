@@ -77,11 +77,111 @@ button{
     align-items: center;
     margin-bottom: 2rem;
 }
-
-
+.display-off{
+    display: none;
+}
+.name{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 1rem;
+}
+h3{
+    font-size: 1rem;
+}
+#pokeid{
+    font-size: 1rem;
+    font-weight: 500;
+}
 @media (max-width: 1024px) {
     .title{
         text-align: center;
         font-size: 1rem;
     }
 }
+/* .tag {
+    display: inline-block;
+    line-height: 2.4rem;
+    padding: 0 1.1rem;
+    font-weight: 600;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: -0.01em;
+    margin: 0 5px;
+  }
+  .tag:first-child {
+    margin-left: 0;
+  }
+  .tag.grass {
+    background-color: rgba(114, 184, 97, 0.1);
+    color: #73B861;
+  }
+  .tag.poison {
+    background-color: rgba(172, 106, 202, 0.1);
+    color: #AC6ACA;
+  }
+  .tag.water {
+    background-color: rgba(79, 120, 190, 0.1);
+    color: #4F77BE;
+  }
+  .tag.fire {
+    background-color: rgba(233, 99, 3, 0.1);
+    color: #E96303;
+  }
+  .tag.psychic {
+    background-color: rgba(235, 139, 132, 0.1);
+    color: #EB8B85;
+  }
+  .tag.flying {
+    background-color: rgba(117, 140, 189, 0.1);
+    color: #758CBD;
+  }
+  .tag.ice {
+    background-color: rgba(113, 186, 171, 0.1);
+    color: #71BAAC;
+  }
+  .tag.ground {
+    background-color: rgba(206, 128, 86, 0.1);
+    color: #CE8056;
+  }
+  .tag.rock {
+    background-color: rgba(132, 190, 179, 0.1);
+    color: #84BEB3;
+  }
+  .tag.electric {
+    background-color: rgba(245, 209, 5, 0.1);
+    color: #D4BC34;
+  }
+  .tag.bug {
+    background-color: rgba(156, 186, 72, 0.1);
+    color: #9BBA48;
+  }
+  .tag.dark {
+    background-color: rgba(89, 87, 97, 0.1);
+    color: #595761;
+  }
+  .tag.dragon {
+    background-color: rgba(44, 106, 193, 0.1);
+    color: #2C6AC1;
+  }
+  .tag.fairy {
+    background-color: rgba(226, 150, 225, 0.1);
+    color: #E296E1;
+  }
+  .tag.fighting {
+    background-color: rgba(196, 79, 99, 0.24);
+    color: #C44D61;
+  }
+  .tag.ghost {
+    background-color: rgba(97, 110, 183, 0.1);
+    color: #616EB7;
+  }
+  .tag.steel {
+    background-color: rgba(101, 148, 161, 0.1);
+    color: #6594A1;
+  }
+  .tag.normal {
+    background-color: rgba(144, 144, 144, 0.1);
+    color: #909090;
+  } */
