@@ -100,15 +100,15 @@ h3{
         font-size: 1rem;
     }
 }
-/* .tag {
-    display: inline-block;
+.tag {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: max-content;
     line-height: 2.4rem;
-    padding: 0 1.1rem;
-    font-weight: 600;
-    font-family: "Montserrat", sans-serif;
-    font-size: 1.3rem;
+    padding: 0 0.6rem;
+    font-weight: 500;
     letter-spacing: -0.01em;
-    margin: 0 5px;
   }
   .tag:first-child {
     margin-left: 0;
@@ -184,4 +184,4 @@ h3{
   .tag.normal {
     background-color: rgba(144, 144, 144, 0.1);
     color: #909090;
-  } */
+  }
