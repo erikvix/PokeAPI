@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import useFetch from "@/Hooks/useFetch";
+import { useEffect, useState } from "react";
 import {
   Card,
   CardContent,
@@ -8,6 +7,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
+import { usePokeStore } from "@/store/PokeStore";
 
 type listPokemon = {
   height: number;
@@ -31,31 +32,51 @@ type listPokemon = {
 
 const index = () => {
   const [data, setData] = useState<listPokemon[]>([]);
+  const store = usePokeStore()
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetch("https://pokeapi.co/api/v2/pokemon/ditto")
-      .then((response) => {
-        return response.json();
-      })
-      .then((data: listPokemon) => {
-        setData([data]);
+    
+    const fetchData = async () => {
+      try {
+        setLoading(true)
+        setData([])
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/` + store.name);
+        const json = await response.json();
+        if (response.status !== 200) throw new Error(json.message);
+        setData([json]);
         console.log(data);
-      });
-  }, []);
+      } catch (error) {
+        console.log('Aconteceu o seguinte erro: ' + error);
+        setData([])
+      } finally{
+        setLoading(false)
+      }
+    }
+    
+    return fetchData
+   
+  }, [store.name]);
   return (
     <section className="mt-10">
       <div className="grid grid-cols-2 xl:grid-cols-4 gap-10">
-        {data.map((item) => (
-          <Card key={item.id}>
+    
+        {loading && <Skeleton/> }
+        {data ? (data.map((item, index) => (
+          <Card key={item.id | index}>
             <CardHeader>
-              <CardTitle className="text-center text-4xl">
+              <CardTitle className="text-center text-4xl capitalize font-semibold tracking-tight ">
                 {item.name}
               </CardTitle>
-              <img src={`${item.sprites["front_default"]}`} alt="" />
-              <img
-                src={`${item.sprites.versions["generation-v"]["black-white"].animated["front_default"]}`}
-                alt=""
-              />
+              {item.sprites && item.sprites.versions["generation-v"]["black-white"].animated["front_default"] ? (
+                <div>
+                  <img
+                    src={`${item.sprites.versions["generation-v"]["black-white"].animated["front_default"]}`}
+                    alt=""
+                  />
+                  <img src={`${item.sprites["front_default"]}`} alt={item.name} />
+                </div>
+              ) : null}
             </CardHeader>
             <CardContent>
               <CardDescription>{item.name}</CardDescription>
@@ -64,20 +85,9 @@ const index = () => {
               <p>Card Footer</p>
             </CardFooter>
           </Card>
-        ))}
+        ))): null} 
+       
       </div>
-      {/* <Card>
-        <CardHeader>
-          <CardTitle>Card Title</CardTitle>
-          <CardDescription>Card Description</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <p>Card Content</p>
-        </CardContent>
-        <CardFooter>
-          <p>Card Footer</p>
-        </CardFooter>
-      </Card> */}
     </section>
   );
 };
