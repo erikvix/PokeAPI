@@ -17,6 +17,11 @@ type listPokemon = {
   name: string;
   description: string;
   sprites: {
+    other: {
+      "official-artwork": {
+        front_default: string;
+      };
+    };
     front_default: string;
     versions: {
       "generation-v": {
@@ -29,8 +34,15 @@ type listPokemon = {
     };
   };
   types: {
-    type: {
-      name: string;
+    "0": {
+      type: {
+        name: string;
+      };
+    };
+    "1": {
+      type: {
+        name: string;
+      };
     };
   };
 };
@@ -38,28 +50,7 @@ type listPokemon = {
 const index = () => {
   const [data, setData] = useState<listPokemon[]>([]);
   const store = usePokeStore();
-  const [loading, setLoading] = useState(false);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       setLoading(true);
-  //       const response = await fetch(
-  //         `https://pokeapi.co/api/v2/pokemon/` + store.name
-  //       );
-  //       const json = await response.json();
-  //       if (response.status !== 200) throw new Error(json.message);
-  //       setData([json]);
-  //       console.log(data);
-  //     } catch (error) {
-  //       console.log("Aconteceu o seguinte erro: " + error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   return fetchData;
-  // }, [store.name]);
+  const urlDesc = "https://pokeapi.co/api/v2/characteristic/{id}/";
 
   useEffect(() => {
     fetch(`https://pokeapi.co/api/v2/pokemon/` + store.name)
@@ -70,23 +61,27 @@ const index = () => {
         setData([data]);
         console.log(data);
       });
-  }, []);
+  }, [store.name]);
   return (
-    <section className="mt-10">
+    <section className="mt-10 card">
       <div className="justify-center flex flex-col items-center">
-        {loading && <Skeleton />}
         {data
           ? data.map((item, index) => (
-              <Card className="max-w-max flex" key={item.id | index}>
+              <Card className="max-w-max" key={item.id | index}>
                 <CardHeader>
-                  <CardTitle className="text-center text-4xl capitalize font-semibold tracking-tight ">
+                  <CardDescription className="text-center text-lg capitalize font-semibold tracking-tight ">
                     {`#${item.id}`}
-                  </CardTitle>
+                  </CardDescription>
                   <CardTitle className="text-center text-4xl capitalize font-semibold tracking-tight ">
                     {item.name}
                   </CardTitle>
-                  <CardTitle className="text-center text-4xl capitalize font-semibold tracking-tight ">
-                    {item.types.type.name}
+                  <CardTitle className="text-center text-xl capitalize font-semibold tracking-tight ">
+                    {item.types["0"].type.name}
+                    {item.types["1"] ? (
+                      <CardTitle className="text-center text-xl capitalize font-semibold tracking-tight">
+                        {item.types["1"].type.name}
+                      </CardTitle>
+                    ) : null}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -94,15 +89,15 @@ const index = () => {
                   item.sprites.versions["generation-v"]["black-white"].animated[
                     "front_default"
                   ] ? (
-                    <div className="flex items-center flex-col justify-center">
+                    <div className="flex items-center justify-center">
                       <img
-                        className="w-full h-auto"
-                        src={`${item.sprites["front_default"]}`}
+                        className="w-52 h-auto"
+                        src={`${item.sprites.other["official-artwork"].front_default}`}
                         alt={item.name}
                       />
                       <img
                         src={`${item.sprites.versions["generation-v"]["black-white"].animated["front_default"]}`}
-                        className="w-full h-auto"
+                        className="w-40 h-auto"
                         alt=""
                       />
                     </div>
@@ -113,9 +108,7 @@ const index = () => {
                     </div>
                   )}
                 </CardContent>
-                <CardFooter>
-                  <p>Card Footer</p>
-                </CardFooter>
+                <CardFooter></CardFooter>
               </Card>
             ))
           : null}
