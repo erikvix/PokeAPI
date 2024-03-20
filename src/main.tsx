@@ -9,5 +9,5 @@ usePokeStore.subscribe((state) => console.log("New State:" , state))
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>,
+  </React.StrictMode>
 )

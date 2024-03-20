@@ -58,7 +58,7 @@ const index = () => {
   const urlDesc = "https://pokeapi.co/api/v2/characteristic/{id}/";
 
   useEffect(() => {
-    fetch(`https://pokeapi.co/api/v2/pokemon`)
+    fetch(`https://pokeapi.co/api/v2/pokemon/${store.name}`)
       .then((response) => {
         return response.json();
       })
@@ -74,20 +74,21 @@ const index = () => {
         {data.map((item, index) => (
           <Card className="max-w-max" key={item.id | index}>
             <CardHeader>
-              <CardDescription className="text-center text-lg capitalize font-semibold tracking-tight ">
-                test
-              </CardDescription>
-              <CardTitle className="text-center text-4xl capitalize font-semibold tracking-tight ">
-                {item.results[0].name}
+              <CardTitle className="text-center text-lg capitalize font-semibold tracking-tight ">
+                {item.name}
               </CardTitle>
-              {/* <CardTitle className="text-center text-xl capitalize font-semibold tracking-tight ">
+
+              {/* <CardTitle className="text-center text-4xl capitalize font-semibold tracking-tight ">
+                {item.results[0].name}
+              </CardTitle> */}
+              <CardDescription className="text-center text-xl capitalize font-semibold tracking-tight ">
                 {item.types["0"].type.name}
                 {item.types["1"] ? (
                   <CardTitle className="text-center text-xl capitalize font-semibold tracking-tight">
                     {item.types["1"].type.name}
                   </CardTitle>
                 ) : null}
-              </CardTitle> */}
+              </CardDescription>
             </CardHeader>
             <CardContent>
               {item.sprites &&
