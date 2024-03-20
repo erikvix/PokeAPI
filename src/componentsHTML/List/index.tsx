@@ -55,7 +55,7 @@ type listPokemon = {
 const index = () => {
   const [data, setData] = useState<listPokemon[]>([]);
   const store = usePokeStore();
-  const urlDesc = "https://pokeapi.co/api/v2/characteristic/{id}/";
+  // const urlDesc = "https://pokeapi.co/api/v2/characteristic/{id}/";
 
   useEffect(() => {
     fetch(`https://pokeapi.co/api/v2/pokemon/${store.name}`)

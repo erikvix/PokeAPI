@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 function useFetch<T>(url: RequestInfo | URL, options?: RequestInit) {
   const [data, setData] = useState<T | null>(null);
