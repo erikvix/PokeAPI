@@ -11,11 +11,6 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { usePokeStore } from "@/store/PokeStore";
 
 type listPokemon = {
-  results: {
-    0: {
-      name: string;
-    };
-  };
   height: number;
   weight: number;
   id: number;
@@ -55,69 +50,22 @@ type listPokemon = {
 const index = () => {
   const [data, setData] = useState<listPokemon[]>([]);
   const store = usePokeStore();
-  const urlDesc = "https://pokeapi.co/api/v2/characteristic/{id}/";
 
   useEffect(() => {
-    fetch(`https://pokeapi.co/api/v2/pokemon/${store.name}`)
+    fetch(`https://pokeapi.co/api/v2/pokemon/` + store.name)
       .then((response) => {
         return response.json();
       })
       .then((data: listPokemon) => {
         setData([data]);
         console.log(data);
-        console.log(`https://pokeapi.co/api/v2/pokemon/`);
+        console.log(`https://pokeapi.co/api/v2/pokemon/` + store.name);
       });
   }, [store.name]);
   return (
     <section className="mt-10 card">
       <div className="justify-center flex flex-col items-center">
-        {data.map((item, index) => (
-          <Card className="max-w-max" key={item.id | index}>
-            <CardHeader>
-              <CardTitle className="text-center text-lg capitalize font-semibold tracking-tight ">
-                {item.name}
-              </CardTitle>
-
-              {/* <CardTitle className="text-center text-4xl capitalize font-semibold tracking-tight ">
-                {item.results[0].name}
-              </CardTitle> */}
-              <CardDescription className="text-center text-xl capitalize font-semibold tracking-tight ">
-                {item.types["0"].type.name}
-                {item.types["1"] ? (
-                  <CardTitle className="text-center text-xl capitalize font-semibold tracking-tight">
-                    {item.types["1"].type.name}
-                  </CardTitle>
-                ) : null}
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              {item.sprites &&
-              item.sprites.versions["generation-v"]["black-white"].animated[
-                "front_default"
-              ] ? (
-                <div className="flex items-center justify-center">
-                  <img
-                    className="w-52 h-auto"
-                    src={`${item.sprites.other["official-artwork"].front_default}`}
-                    alt={item.name}
-                  />
-                  <img
-                    src={`${item.sprites.versions["generation-v"]["black-white"].animated["front_default"]}`}
-                    className="w-40 h-auto"
-                    alt=""
-                  />
-                </div>
-              ) : (
-                <div className="flex gap-4  ">
-                  <Skeleton className="h-[250px] w-[250px] rounded-xl" />
-                  <Skeleton className="h-[250px] w-[250px] rounded-xl" />
-                </div>
-              )}
-            </CardContent>
-            <CardFooter></CardFooter>
-          </Card>
-        ))}
-        {/* {data
+        {data
           ? data.map((item, index) => (
               <Card className="max-w-max" key={item.id | index}>
                 <CardHeader>
@@ -163,7 +111,7 @@ const index = () => {
                 <CardFooter></CardFooter>
               </Card>
             ))
-          : null} */}
+          : null}
       </div>
     </section>
   );
